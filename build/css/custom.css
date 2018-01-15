@@ -15,6 +15,14 @@ html , body{
  height:100%;
  }
 
+.BMap_cpyCtrl {  
+    display: none;  
+}  
+  
+.anchorBL {  
+    display: none;  
+}  
+
 .daterangepicker .ranges li {
     color: #73879C
 }

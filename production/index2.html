@@ -4,8 +4,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=jUQW0AklKomlWlMfDYG0z3ZWSrGu52we"></script>
     <script src="../build/js/echarts.min.js"></script>
     <script src="../build/js/echarts-gl.min.js"></script>
+    <script src="../build/js/bmap.min.js"></script>
+    <script src="../build/js/china.js"></script>
+    <script src="../build/js/world.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
@@ -30,7 +34,7 @@
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../build/css/custom.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -344,11 +348,213 @@
 
 
           <div class="row">
-            <div class="col-md-16 col-sm-12 col-xs-12">
-                <div class="col-md-12" style="padding: 30px">
-                    <p>World Vector Map</p>
-                    <div id="world-map-gdp" style="height:400px;"></div>
-                  </div>
+            <div class="col-md-12 col-sm-12 col-xs-12"></div>
+            <div id="main" style="height:800px;"></div>
+            <script type="text/javascript">
+              // 基于准备好的dom，初始化echarts实例
+              var myChart = echarts.init(document.getElementById('main'));
+              // 指定图表的配置项和数据
+              var data = [
+                  {name: '北京', value: 1000},
+                  {name: '法兰克福', value: 200},
+                  {name: '新加坡', value: 333},
+                  {name: '印度', value: 200}
+              ];
+              var geoCoordMap = {
+                  '北京':[116.46,39.92],
+                  '法兰克福':[14.32,52.2],
+                  '新加坡':[103.45,1.22],
+                  '印度':[72,22]
+              };
+
+              var convertData = function (data) {
+                  var res = [];
+                  for (var i = 0; i < data.length; i++) {
+                      var geoCoord = geoCoordMap[data[i].name];
+                      if (geoCoord) {
+                          res.push({
+                              name: data[i].name,
+                              value: geoCoord.concat(data[i].value)
+                          });
+                      }
+                  }
+                  return res;
+              };
+
+              option = {
+                  title: {
+                      text: '热力图',
+                      left: 'center'
+                  },
+                  tooltip : {
+                      trigger: 'item'
+                  },
+                  bmap: {
+                      center: [104.114129, 37.550339],
+                      zoom: 3,
+                      roam: true,
+                      mapStyle: {
+                          styleJson: [{
+                              'featureType': 'water',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#fdfdfd'
+                              }
+                          }, {
+                              'featureType': 'land',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#8FBDB1'
+                              }
+                          }, {
+                              'featureType': 'railway',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'visibility': 'off'
+                              }
+                          }, {
+                              'featureType': 'highway',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#fdfdfd'
+                              }
+                          }, {
+                              'featureType': 'highway',
+                              'elementType': 'labels',
+                              'stylers': {
+                                  'visibility': 'off'
+                              }
+                          }, {
+                              'featureType': 'arterial',
+                              'elementType': 'geometry',
+                              'stylers': {
+                                  'color': '#fefefe'
+                              }
+                          }, {
+                              'featureType': 'arterial',
+                              'elementType': 'geometry.fill',
+                              'stylers': {
+                                  'color': '#fefefe'
+                              }
+                          }, {
+                              'featureType': 'poi',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'visibility': 'off'
+                              }
+                          }, {
+                              'featureType': 'green',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'visibility': 'off'
+                              }
+                          }, {
+                              'featureType': 'subway',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'visibility': 'off'
+                              }
+                          }, {
+                              'featureType': 'manmade',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#d1d1d1'
+                              }
+                          }, {
+                              'featureType': 'local',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#d1d1d1'
+                              }
+                          }, {
+                              'featureType': 'arterial',
+                              'elementType': 'labels',
+                              'stylers': {
+                                  'visibility': 'off'
+                              }
+                          }, {
+                              'featureType': 'boundary',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#fefefe'
+                              }
+                          }, {
+                              'featureType': 'building',
+                              'elementType': 'all',
+                              'stylers': {
+                                  'color': '#d1d1d1'
+                              }
+                          }, {
+                              'featureType': 'label',
+                              'elementType': 'labels.text.fill',
+                              'stylers': {
+                                  'color': '#999999'
+                              }
+                          }]
+                      }
+                  },
+                  series : [
+                      {
+                          name: 'pm2.5',
+                          type: 'scatter',
+                          coordinateSystem: 'bmap',
+                          data: convertData(data),
+                          symbolSize: function (val) {
+                              return val[2] / 10;
+                          },
+                          label: {
+                              normal: {
+                                  formatter: '{b}',
+                                  position: 'right',
+                                  show: false
+                              },
+                              emphasis: {
+                                  show: true
+                              }
+                          },
+                          itemStyle: {
+                              normal: {
+                                  color: 'purple'
+                              }
+                          }
+                      },
+                      {
+                          name: '量',
+                          type: 'effectScatter',
+                          coordinateSystem: 'bmap',
+                          data: convertData(data.sort(function (a, b) {
+                              return b.value - a.value;
+                          }).slice(0, 6)),
+                          symbolSize: function (val) {
+                              return val[2] / 10;
+                          },
+                          showEffectOn: 'render',
+                          rippleEffect: {
+                              brushType: 'stroke'
+                          },
+                          hoverAnimation: true,
+                          label: {
+                              normal: {
+                                  formatter: '{b}',
+                                  position: 'right',
+                                  show: true
+                              }
+                          },
+                          itemStyle: {
+                              normal: {
+                                  color: '#215445',
+                                  shadowBlur: 10,
+                                  shadowColor: '#333'
+                              }
+                          },
+                          zlevel: 1
+                      }
+                  ]
+              };
+      
+              // 使用刚指定的配置项和数据显示图表。
+              myChart.setOption(option);
+          </script>
           </div>
         </div>
         <!-- /page content -->
