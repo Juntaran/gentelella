@@ -2160,16 +2160,6 @@ if (typeof NProgress != 'undefined') {
 					pointHoverBorderColor: "rgba(220,220,220,1)",
 					pointBorderWidth: 1,
 					data: [31, 74, 6, 39, 20, 85, 7]
-				  }, {
-					label: "My Second dataset",
-					backgroundColor: "rgba(3, 88, 106, 0.3)",
-					borderColor: "rgba(3, 88, 106, 0.70)",
-					pointBorderColor: "rgba(3, 88, 106, 0.70)",
-					pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
-					pointHoverBackgroundColor: "#fff",
-					pointHoverBorderColor: "rgba(151,187,205,1)",
-					pointBorderWidth: 1,
-					data: [82, 23, 66, 9, 99, 4, 2]
 				  }]
 				},
 			  });
@@ -2187,16 +2177,6 @@ if (typeof NProgress != 'undefined') {
                   data: {
                     labels: ["January", "February", "March", "April", "May", "June", "July"],
                     datasets: [{
-                      label: "My First dataset",
-                      backgroundColor: "rgba(38, 185, 154, 0.31)",
-                      borderColor: "rgba(38, 185, 154, 0.7)",
-                      pointBorderColor: "rgba(38, 185, 154, 0.7)",
-                      pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-                      pointHoverBackgroundColor: "#fff",
-                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                      pointBorderWidth: 1,
-                      data: [31, 74, 6, 39, 20, 85, 7]
-                    }, {
                       label: "My Second dataset",
                       backgroundColor: "rgba(3, 88, 106, 0.3)",
                       borderColor: "rgba(3, 88, 106, 0.70)",
@@ -2210,7 +2190,126 @@ if (typeof NProgress != 'undefined') {
                   },
                 });
               
-              }
+							}
+							
+
+			        // Line statusErrorCode
+			 
+							if ($('#statusErrorCode').length ){	
+                var ctx = document.getElementById("statusErrorCode");
+                var statusErrorCode = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                    labels: ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
+                    datasets: [{
+                      label: "4xx",
+                      backgroundColor: "rgba(38, 185, 154, 0.31)",
+                      borderColor: "rgba(38, 185, 154, 0.7)",
+                      pointBorderColor: "rgba(38, 185, 154, 0.7)",
+                      pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+                      pointHoverBackgroundColor: "#fff",
+                      pointHoverBorderColor: "rgba(220,220,220,1)",
+                      pointBorderWidth: 1,
+                      data: [31, 74, 6, 39, 20, 85, 7]
+                    }, {
+                      label: "5xx",
+                      backgroundColor: "rgba(3, 88, 106, 0.3)",
+                      borderColor: "rgba(3, 88, 106, 0.70)",
+                      pointBorderColor: "rgba(3, 88, 106, 0.70)",
+                      pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+                      pointHoverBackgroundColor: "#fff",
+                      pointHoverBorderColor: "rgba(151,187,205,1)",
+                      pointBorderWidth: 1,
+                      data: [82, 23, 66, 9, 99, 4, 2]
+                    }]
+                  },
+                });
+							}
+							
+							// Line statusSuccessCode
+			 
+							if ($('#statusSuccessCode').length ){	
+                var ctx = document.getElementById("statusSuccessCode");
+                var statusSuccessCode = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                    labels: ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
+                    datasets: [{
+                      label: "200",
+                      backgroundColor: "rgba(38, 185, 154, 0.31)",
+                      borderColor: "rgba(38, 185, 154, 0.7)",
+                      pointBorderColor: "rgba(38, 185, 154, 0.7)",
+                      pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+                      pointHoverBackgroundColor: "#fff",
+                      pointHoverBorderColor: "rgba(220,220,220,1)",
+                      pointBorderWidth: 1,
+                      data: [31, 74, 6, 39, 20, 85, 7]
+                    }, {
+                      label: "3xx",
+                      backgroundColor: "rgba(3, 88, 106, 0.3)",
+                      borderColor: "rgba(3, 88, 106, 0.70)",
+                      pointBorderColor: "rgba(3, 88, 106, 0.70)",
+                      pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+                      pointHoverBackgroundColor: "#fff",
+                      pointHoverBorderColor: "rgba(151,187,205,1)",
+                      pointBorderWidth: 1,
+                      data: [82, 23, 66, 9, 99, 4, 2]
+                    }]
+                  },
+                });
+							}
+							
+
+							// qps chart
+			 
+			if ($('#qps').length ){	
+			
+			  var ctx = document.getElementById("qps");
+			  var qps = new Chart(ctx, {
+				type: 'line',
+				data: {
+				  labels: ["January", "February", "March", "April", "May", "June", "July"],
+				  datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: [31, 74, 6, 39, 20, 85, 7]
+				  }]
+				},
+			  });
+			
+            }
+            
+
+              // requestTime chart2
+			 
+			if ($('#requestTime').length ){	
+			
+                var ctx = document.getElementById("requestTime");
+                var requestTime = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [{
+                      label: "My Second dataset",
+                      backgroundColor: "rgba(3, 88, 106, 0.3)",
+                      borderColor: "rgba(3, 88, 106, 0.70)",
+                      pointBorderColor: "rgba(3, 88, 106, 0.70)",
+                      pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+                      pointHoverBackgroundColor: "#fff",
+                      pointHoverBorderColor: "rgba(151,187,205,1)",
+                      pointBorderWidth: 1,
+                      data: [82, 23, 66, 9, 99, 4, 2]
+                    }]
+                  },
+                });
+              
+							}
 
 				
 			  // Bar chart
